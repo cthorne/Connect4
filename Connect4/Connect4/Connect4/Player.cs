@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Connect4
 {
-    class Program
+    public class Player
     {
-        static void Main(string[] args)
-        {
+        // Player name
 
-        }
+        // Player moves?
+
+        // Turn
     }
 }
