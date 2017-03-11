@@ -21,6 +21,7 @@ namespace Connect4
                 Player player = new Player("Player " + i);
                 players.Add(player);
             }
+            GameHandler.playGame(gameBoard, players);
         }
     }
 }

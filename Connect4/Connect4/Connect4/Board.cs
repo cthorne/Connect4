@@ -34,6 +34,10 @@ namespace Connect4
             gameBoard = new string[rows, cols];
             gameWon = false;
             columnCounters = new Dictionary<int, int>();
+            for (int i = 0; i < numberCols; i++)
+            {
+                columnCounters[i] = 0;
+            }
         }
         
 

@@ -13,6 +13,7 @@ namespace Connect4
             playerName = name;
             playerTurn = 1;
             movesMade = new List<Tuple<int,int>>();
+            playerMovesMade = 0;
         }
         // Player name
         public string playerName { get; set; }
@@ -21,6 +22,11 @@ namespace Connect4
         // Turn
         public int playerTurn { get; set; }
 
+        public int playerMovesMade { get; set; }
 
+        public void printPlayerTurn()
+        {
+            Console.WriteLine("{0} turn:\n {1}", playerName, playerTurn);
+        }
     }
 }

@@ -11,15 +11,20 @@ namespace Connect4
         // Play game
         public static void playGame(Board board, List<Player> players)
         {
-            int movesMade = 0;
-            while (movesMade < board.maxBoardMoves && !board.gameWon)
+            while (board.boardMovesMade < board.maxBoardMoves && !board.gameWon)
             {
                 foreach (Player player in players)
                 {
+                    player.printPlayerTurn();
                     MoveHandler.handlePlayerMove(player, board);
                 }
             }
             printCompletionMessage(board);
+        }
+
+        private static void printCompletionMessage(Board board)
+        {
+
         }
     }
 }

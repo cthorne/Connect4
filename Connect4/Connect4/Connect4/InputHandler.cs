@@ -42,12 +42,14 @@ namespace Connect4
             int columnToInsertInto;
             Console.WriteLine("Please enter a column number between 0 and "
                 + board.numberCols + " to insert into.");
-            if (!Int32.TryParse(Console.ReadLine(), out columnToInsertInto))
+
+            if (!Int32.TryParse(Console.ReadLine(), out columnToInsertInto) 
+                || (columnToInsertInto < 0 || columnToInsertInto > board.numberCols))
             {
                 Console.WriteLine("Please only enter whole numbers between 0 and " + board.numberCols);
                 return getPlayerMove(player, board);
             }
-            return columnToInsertInto;
+            return columnToInsertInto - 1;
         }
 
 
