@@ -22,6 +22,7 @@ namespace Connect4
                 players.Add(player);
             }
             GameHandler.playGame(gameBoard, players);
+
         }
     }
 }

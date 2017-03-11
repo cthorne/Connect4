@@ -30,11 +30,6 @@ namespace Connect4
                 return;
             }            
         }
-        // Verify initial input for board initialisation
-        private static bool verifyBoardDimensionsInput(string[] inputs)
-        {
-            return inputs.Count() == NUMBER_OF_INPUTS;
-        }
 
         // Get column to insert players move into
         public static int getPlayerMove(Player player, Board board)
@@ -43,7 +38,7 @@ namespace Connect4
             Console.WriteLine("Please enter a column number between 0 and "
                 + board.numberCols + " to insert into.");
 
-            if (!Int32.TryParse(Console.ReadLine(), out columnToInsertInto) 
+            if (!Int32.TryParse(Console.ReadLine(), out columnToInsertInto)
                 || (columnToInsertInto < 0 || columnToInsertInto > board.numberCols))
             {
                 Console.WriteLine("Please only enter whole numbers between 0 and " + board.numberCols);
@@ -52,6 +47,10 @@ namespace Connect4
             return columnToInsertInto - 1;
         }
 
-
+        // Verify initial input for board initialisation
+        private static bool verifyBoardDimensionsInput(string[] inputs)
+        {
+            return inputs.Count() == NUMBER_OF_INPUTS;
+        }
     }
 }

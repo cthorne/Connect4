@@ -8,6 +8,8 @@ namespace Connect4
 {
     public static class GameHandler
     {
+        const string GAME_WON = "Player {0} has won the game.";
+        const string GAME_DRAWN = "Game has ended in a draw.";
         // Play game
         public static void playGame(Board board, List<Player> players)
         {
@@ -19,12 +21,13 @@ namespace Connect4
                     MoveHandler.handlePlayerMove(player, board);
                 }
             }
-            printCompletionMessage(board);
+            printDrawMessage(board);
+            Console.ReadKey();
         }
 
-        private static void printCompletionMessage(Board board)
+        private static void printDrawMessage(Board board)
         {
-
+            Console.WriteLine(GAME_DRAWN);            
         }
     }
 }
