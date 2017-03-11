@@ -15,20 +15,30 @@ namespace Connect4
             Console.WriteLine("Please enter the board dimensions (number of rows, number of columns)");
             string input = Console.ReadLine();
             string[] splitInputs = input.Split(null);
+
             if (!verifyBoardDimensionsInput(splitInputs))
             {
                 Console.WriteLine("Please enter values in the format 'rows cols', with a space between.");
                 getBoardDimensions(out rows, out cols);
                 return;
             }
+
             bool rowsValid = Int32.TryParse(splitInputs[0], out rows);
             bool colsValid = Int32.TryParse(splitInputs[1], out cols);
+            // Ensure integers were entered
             if (!rowsValid || !colsValid)
             {
                 Console.WriteLine("Please enter only whole numbers for the rows and columns.");
                 getBoardDimensions(out rows, out cols);
                 return;
-            }            
+            }
+            // Ensure board space is winnable
+            if (rows < 4 || cols < 4)
+            {
+                Console.WriteLine("Please enter at least a 4 by 4 grid - lesser grids are unwinnable.");
+                getBoardDimensions(out rows, out cols);
+                return;
+            }
         }
 
         // Get column to insert players move into

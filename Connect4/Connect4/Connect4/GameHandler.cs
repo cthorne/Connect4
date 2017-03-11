@@ -13,12 +13,16 @@ namespace Connect4
         // Play game
         public static void playGame(Board board, List<Player> players)
         {
+            // Play game until won or out of moves
             while (board.boardMovesMade < board.maxBoardMoves && !board.gameWon)
             {
                 foreach (Player player in players)
                 {
-                    player.printPlayerTurn();
-                    MoveHandler.handlePlayerMove(player, board);
+                    if (!board.gameWon)
+                    {
+                        player.printPlayerTurn();
+                        MoveHandler.handlePlayerMove(player, board);
+                    }
                 }
             }
             if (!board.gameWon)

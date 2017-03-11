@@ -20,6 +20,7 @@ namespace Connect4
                     handlePlayerMove(player, board);
                     return;
                 }
+                // After validation, conduct move
                 enactMove(board, player, currentPlayersMove);
             }            
         }
@@ -39,7 +40,7 @@ namespace Connect4
                 Console.WriteLine("Column {0} is full, please select another.", playerMove + 1);
                 return false; 
             }
-            if (!string.IsNullOrEmpty(board.gameBoard[countersInColumn, playerMove]))
+            if (board.gameBoard[countersInColumn, playerMove] != Board.positionPlaceholder)
                 { return false; }
             return true;
         }
@@ -47,45 +48,90 @@ namespace Connect4
         private static void enactMove(Board board, Player player, int playerMove)
         {
             int countersInColumn = board.columnCounters[playerMove];
-            board.gameBoard[countersInColumn, playerMove] = player.playerName;
+            board.gameBoard[countersInColumn, playerMove] = player.playerIcon;
             board.columnCounters[playerMove]++;
             board.boardMovesMade++;
 
             player.playerMovesMade++;
             if (player.playerMovesMade >= 4)
             {
-                if (checkHorizontalWinStatus(playerMove, countersInColumn, player, board))
+                if (checkHorizontalWinStatus(playerMove, countersInColumn, player, board)
+                    || checkVerticalWinStatus(playerMove, player, board) || checkDiagonalWinStatus(player, board))
                 {
                     board.gameWon = true;
                     Console.WriteLine(GameHandler.GAME_WON, player.playerName);
                 }
             }
             player.playerTurn++;
+            board.printBoard();
         }
         // Determine win status
         private static bool checkHorizontalWinStatus(int playerMove, int countersInColumn, 
             Player player, Board board)
         {
             int countersInRow = 0;
-            if (playerMove > 0)
+            for (int i = 0; i < board.numberCols; i++)
             {
-                for (int i = 0; i < board.numberCols; i++)
+                if (board.gameBoard[countersInColumn, i] == player.playerIcon && countersInRow < 4)
                 {
-                    if (board.gameBoard[countersInColumn, i] == player.playerName && countersInRow < 4)
-                    {
-                        countersInRow++;
-                    }
-                    else if (countersInRow >= 4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        countersInRow = 0;
-                    }
-                }                    
-            }           
+                    countersInRow++;
+                }
+                else if (countersInRow >= 4)
+                {
+                    break;
+                }
+                else
+                {
+                    countersInRow = 0;
+                }
+            }                    
+                 
             return countersInRow >= 4;
+        }
+
+        private static bool checkVerticalWinStatus(int playerMove,
+            Player player, Board board)
+        {
+            int countersInCol = 0;
+            for (int i = 0; i < board.numberRows; i++)
+            {
+                if (board.gameBoard[i, playerMove] == player.playerIcon && countersInCol < 4)
+                {
+                    countersInCol++;
+                }
+                else if (countersInCol >= 4)
+                {
+                    break;
+                }
+                else
+                {
+                    countersInCol = 0;
+                }
+            }
+            
+            return countersInCol >= 4;
+        }
+
+        private static bool checkDiagonalWinStatus(Player player, Board board)
+        {
+            int countersInDiagonal = 0;
+            for (int i = 0; i < board.numberRows && i < board.numberCols; i++)
+            {
+                if (board.gameBoard[i, i] == player.playerIcon && countersInDiagonal < 4)
+                {
+                    countersInDiagonal++;
+                }
+                else if (countersInDiagonal >= 4)
+                {
+                    break;
+                }
+                else
+                {
+                    countersInDiagonal = 0;
+                }
+            }
+
+            return countersInDiagonal >= 4;
         }
     }
 }

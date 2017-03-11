@@ -12,16 +12,14 @@ namespace Connect4
         {
             playerName = name;
             playerTurn = 1;
-            movesMade = new List<Tuple<int,int>>();
             playerMovesMade = 0;
         }
         // Player name
         public string playerName { get; set; }
-        // Player moves?
-        public List<Tuple<int, int>> movesMade { get; set; }
-        // Turn
+        public string playerIcon { get; set; }
+        // Current turn
         public int playerTurn { get; set; }
-
+        // Number of moves made
         public int playerMovesMade { get; set; }
 
         public void printPlayerTurn()
