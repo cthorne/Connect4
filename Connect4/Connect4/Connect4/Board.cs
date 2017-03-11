@@ -9,13 +9,31 @@ namespace Connect4
     public class Board
     {
         // Board rows / cols
-        private int numberRows { get; set; }
-        private int numberCols { get; set; }
+        public int numberRows { get; set; }
+        public int numberCols { get; set; }
+
+        public string[,] gameBoard { get; set; }
+
+        public Dictionary<int, int> columnCounters { get; set; }
+
+        public int boardMovesMade { get; set; }
+
+        public int maxBoardMoves {
+            get {
+                return numberRows * numberCols;
+            }
+        }
+
+
+        public bool gameWon { get; set; }
 
         public Board(int rows, int cols)
         {
             numberRows = rows;
             numberCols = cols;
+            gameBoard = new string[rows, cols];
+            gameWon = false;
+            columnCounters = new Dictionary<int, int>();
         }
         
 

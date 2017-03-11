@@ -11,12 +11,16 @@ namespace Connect4
         public Player(string name)
         {
             playerName = name;
+            playerTurn = 1;
+            movesMade = new List<Tuple<int,int>>();
         }
         // Player name
         public string playerName { get; set; }
         // Player moves?
-
+        public List<Tuple<int, int>> movesMade { get; set; }
         // Turn
         public int playerTurn { get; set; }
+
+
     }
 }

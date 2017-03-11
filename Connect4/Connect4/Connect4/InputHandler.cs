@@ -8,6 +8,7 @@ namespace Connect4
 {
     public static class InputHandler
     {
+        const int NUMBER_OF_INPUTS = 2;
         // Get initial input from user
         public static void getBoardDimensions(out int rows, out int cols)
         {
@@ -32,10 +33,23 @@ namespace Connect4
         // Verify initial input for board initialisation
         private static bool verifyBoardDimensionsInput(string[] inputs)
         {
-            return inputs.Count() != 2;
+            return inputs.Count() == NUMBER_OF_INPUTS;
         }
 
-        // Verify move is valid (in bounds) and input valid
+        // Get column to insert players move into
+        public static int getPlayerMove(Player player, Board board)
+        {
+            int columnToInsertInto;
+            Console.WriteLine("Please enter a column number between 0 and "
+                + board.numberCols + " to insert into.");
+            if (!Int32.TryParse(Console.ReadLine(), out columnToInsertInto))
+            {
+                Console.WriteLine("Please only enter whole numbers between 0 and " + board.numberCols);
+                return getPlayerMove(player, board);
+            }
+            return columnToInsertInto;
+        }
+
 
     }
 }

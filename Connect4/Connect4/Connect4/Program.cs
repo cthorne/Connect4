@@ -15,9 +15,11 @@ namespace Connect4
             int rows, cols;
             InputHandler.getBoardDimensions(out rows, out cols);
             Board gameBoard = new Board(rows, cols);
+            List<Player> players = new List<Player>();
             for (int i = 0; i < numberPlayers; i++)
             {
                 Player player = new Player("Player " + i);
+                players.Add(player);
             }
         }
     }
