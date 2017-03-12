@@ -16,12 +16,25 @@ namespace Connect4
         }
         // Player name
         public string playerName { get; set; }
+
+        /// <summary>
+        /// Icon used to reprsent player on board.
+        /// </summary>
         public string playerIcon { get; set; }
-        // Current turn
+
+        /// <summary>
+        /// Current turn for this player.
+        /// </summary>
         public int playerTurn { get; set; }
-        // Number of moves made
+
+        /// <summary>
+        /// Number of moves made by player.
+        /// </summary>
         public int playerMovesMade { get; set; }
 
+        /// <summary>
+        /// Print current players turn.
+        /// </summary>
         public void printPlayerTurn()
         {
             Console.WriteLine("{0} turn:\n {1}", playerName, playerTurn);

@@ -9,9 +9,10 @@ namespace Connect4
     public class Board
     {
         // Placeholder for each board position, before counter placed.
-        public const string positionPlaceholder = "*";
+        public const string POSITION_PLACEHOLDER = "*";
+        private const string POSITION_SEPARATOR = " ";
 
-        // Board rows / cols
+        // Number of board rows / cols
         public int numberRows { get; set; }
         public int numberCols { get; set; }
 
@@ -20,9 +21,14 @@ namespace Connect4
         /// </summary>
         public string[,] gameBoard { get; set; }
 
-        // Number of counters in a column - key is column, value count
+        /// <summary>
+        /// Number of counters in a column - key is column, value count
+        /// </summary>
         public Dictionary<int, int> columnCounters { get; set; }
 
+        /// <summary>
+        /// Number of moves made in the game.
+        /// </summary>
         public int boardMovesMade { get; set; }
 
         /// <summary>
@@ -40,19 +46,19 @@ namespace Connect4
         /// <summary>
         /// Setup board.
         /// </summary>
-        /// <param name="rows"></param>
-        /// <param name="cols"></param>
+        /// <param name="rows">Number of rows</param>
+        /// <param name="cols">Number of columns</param>
         public Board(int rows, int cols)
         {
             numberRows = rows;
             numberCols = cols;
             gameBoard = new string[rows, cols];
-            // Initialise board values to placeholder
+            // Initialise board values to placeholder (empty)
             for (int c = 0; c < numberCols; c++)
             {
                 for (int r = 0; r < numberRows; r++)
                 {
-                    gameBoard[r, c] = positionPlaceholder;
+                    gameBoard[r, c] = POSITION_PLACEHOLDER;
                 }
             }
             gameWon = false;
@@ -73,7 +79,7 @@ namespace Connect4
             {
                 for (int c = 0; c < numberCols; c++)
                 {
-                    outputString.Append(gameBoard[r, c] + " ");
+                    outputString.Append(gameBoard[r, c] + POSITION_SEPARATOR);
                 }
                 outputString.AppendLine();
             }
